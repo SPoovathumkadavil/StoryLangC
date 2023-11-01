@@ -3,12 +3,59 @@
  */
 package storylangc;
 
+import java.io.File;
+import java.net.URL;
+
+import storylangc.lexer.SLL;
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
+    /**
+     * Get File from the resources folder.
+     * @param fileName
+     * @return
+     * @throws IllegalArgumentException
+     * @throws NullPointerException
+     */
+    public static File getFileFromResource(String fileName) throws IllegalArgumentException, NullPointerException {
+        ClassLoader classLoader = App.class.getClassLoader();
+        if (classLoader == null)
+            throw new NullPointerException("Could not get class loader.");
+        if (fileName == null)
+            throw new NullPointerException("File name cannot be null.");
+    
+        URL resourceUrl = classLoader.getResource(fileName);
+        if (resourceUrl == null)
+            throw new IllegalArgumentException("File does not exist.");
+    
+        File file = new File(resourceUrl.getFile());
+        return file;
+    }
+
+    /**
+     * Get File from set path
+     * @param path
+     * @return
+     * @throws IllegalArgumentException
+     * @throws NullPointerException
+     */
+    public static File getFileFromPath(String path) throws IllegalArgumentException, NullPointerException {
+        if (path == null)
+            throw new NullPointerException("Path cannot be null.");
+    
+        File file = new File(path);
+        if (!file.exists())
+            throw new IllegalArgumentException("File does not exist.");
+    
+        return file;
     }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        SLL sll = new SLL();
+        for (String path : sll.getAllFilePaths("src/main/resources/ExampleProjectA")) {
+            System.out.println(
+                "File: " + path + "\n" +
+                "Lines: " + sll.fileToString(path) + "\n"
+            );
+        }
     }
 }

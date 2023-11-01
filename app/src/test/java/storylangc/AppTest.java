@@ -3,12 +3,55 @@
  */
 package storylangc;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.File;
+
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+    @Test
+    void testGetFileFromResource() {
+        // Test with a file that exists in the resources directory
+        File file = App.getFileFromResource("existingFile.sl");
+        assertNotNull(file);
+        assertTrue(file.exists());
+
+        // Test with a file that does not exist in the resources directory
+        assertThrows(IllegalArgumentException.class, () -> {
+            App.getFileFromResource("nonExistingFile.sl");
+        });
     }
+
+    @Test
+    void testGetFileFromResourceWithNull() {
+        // Test with null input
+        assertThrows(NullPointerException.class, () -> {
+            App.getFileFromResource(null);
+        });
+    }
+
+    @Test
+    void testGetFileFromPath() {
+        // Test with a file that exists in the resources directory
+        File file = App.getFileFromPath("app/src/test/resources/existingFile.sl");
+        assertNotNull(file);
+        assertTrue(file.exists());
+
+        // Test with a file that does not exist in the resources directory
+        assertThrows(IllegalArgumentException.class, () -> {
+            App.getFileFromPath("app/src/test/resources/nonExistingFile.sl");
+        });
+    }
+
+    @Test
+    void testGetFileFromPathWithNull() {
+        // Test with null input
+        assertThrows(NullPointerException.class, () -> {
+            App.getFileFromPath(null);
+        });
+    }
+
 }

@@ -20,8 +20,6 @@ dependencies {
     // Use JUnit Jupiter for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
 
-    implementation 'info.picocli:picocli:4.7.5'
-
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:31.1-jre'
 }
