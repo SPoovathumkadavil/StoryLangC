@@ -10,19 +10,19 @@ import java.util.List;
 public class SLL {
 
   /**
-   * Method to convert a file to an ArrayList of lines.
+   * Method to convert a file to String.
    * 
    * @param filePath Path to file.
-   * @return ArrayList of Lines
+   * @return String
    */
   public String fileToString(String filePath) {
     String fileString = "";
     try {
       fileString = Files.readString(Paths.get(filePath))
         .strip()
-        .replaceAll("\n", " ")
-        .replaceAll("\r", " ")
-        .replaceAll("\t", " ");
+        .replaceAll("\n", "")
+        .replaceAll("\r", "")
+        .replaceAll("\t", "");
     } catch (IOException e) {
       e.printStackTrace();
     }

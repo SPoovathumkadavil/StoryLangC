@@ -3,13 +3,21 @@
  */
 package storylangc;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
+
+import storylangc.lexer.SLL;
 
 class AppTest {
     @Test
@@ -36,13 +44,13 @@ class AppTest {
     @Test
     void testGetFileFromPath() {
         // Test with a file that exists in the resources directory
-        File file = App.getFileFromPath("app/src/test/resources/existingFile.sl");
+        File file = App.getFileFromPath("src/test/resources/existingFile.sl");
         assertNotNull(file);
         assertTrue(file.exists());
 
         // Test with a file that does not exist in the resources directory
         assertThrows(IllegalArgumentException.class, () -> {
-            App.getFileFromPath("app/src/test/resources/nonExistingFile.sl");
+            App.getFileFromPath("src/test/resources/nonExistingFile.sl");
         });
     }
 
@@ -52,6 +60,40 @@ class AppTest {
         assertThrows(NullPointerException.class, () -> {
             App.getFileFromPath(null);
         });
+    }
+
+    @Test
+    void testFileToString() {
+        SLL sll = new SLL();
+        String filePath = "src/test/resources/testFile.sl";
+
+        // Create a test file
+        try {
+            Files.writeString(Path.of(filePath), "Test content");
+        } catch (IOException e) {
+            fail("Failed to create test file");
+        }
+
+        // Test the fileToString method
+        String fileContent = sll.fileToString(filePath);
+        assertEquals("Test content", fileContent);
+
+        // Delete the test file
+        try {
+            Files.delete(Path.of(filePath));
+        } catch (IOException e) {
+            fail("Failed to delete test file");
+        }
+    }
+
+    @Test
+    void testGetAllFilePaths() {
+        SLL sll = new SLL();
+        String directoryPath = "src/test/resources";
+
+        // Test the getAllFilePaths method
+        List<String> filePaths = sll.getAllFilePaths(directoryPath);
+        assertTrue(filePaths.contains("src/test/resources/existingFile.sl"));
     }
 
 }

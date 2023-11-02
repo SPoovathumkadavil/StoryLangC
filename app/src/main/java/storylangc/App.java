@@ -54,7 +54,7 @@ public class App {
         for (String path : sll.getAllFilePaths("src/main/resources/ExampleProjectA")) {
             System.out.println(
                 "File: " + path + "\n" +
-                "Lines: " + sll.fileToString(path) + "\n"
+                "Lines: " + sll.fileToString(path).split(" ")[5] + "\n"
             );
         }
     }
