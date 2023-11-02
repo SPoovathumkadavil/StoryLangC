@@ -5,13 +5,15 @@ public class Words {
   /**
    * Enum for all keywords in StoryLang.
    */
-  public enum Keyword {
+  public enum Keywords {
     // Keywords
     WHEN("when"),
     OTHERWISE("otherwise"),
     WHILE("while"),
-    FOR("for"),
+    FOR_EVERY("for every"),
     FUNCTION("function"),
+    OF("of"),
+    RETURNS("returns"),
     GIVE("give"),
     BREAK("break"),
     CONTINUE("continue"),
@@ -23,7 +25,7 @@ public class Words {
     INTEGER("integer"),
     DOUBLE("double"),
     STRING("string"),
-    BOOL("bool"),
+    BOOLEAN("boolean"),
     // Operators
     PLUS("plus"),
     MINUS("minus"),
@@ -40,24 +42,24 @@ public class Words {
     AND("and"),
     OR("or"),
     // Symbols
-    LEFT_PARENTHESIS("("),
-    RIGHT_PARENTHESIS(")"),
-    LEFT_BRACE("{"),
-    RIGHT_BRACE("}"),
-    LEFT_BRACKET("["),
-    RIGHT_BRACKET("]"),
-    BELONGS_TO(","),
-    DOT("."),
+    COMBINATION("combination"),
+    END_COMBINATION("end-combination"),
+    ARRAY("array"),
+    END_ARRAY("end-array"),
+    SET("set"),
+    END_SET("end-set"),
+    BELONGS_TO(","), // Acts like : in python
+    DOT("."), // Used For Doubles
     SEMICOLON(";"),
     END_STATEMENT("!"),
     // Other
     IDENTIFIER("identifier"),
     NUMBER("number"),
-    STOP("stop");
+    STOP("stop"); // Exit Program during Composition
 
     private final String name;
 
-    private Keyword(String name) {
+    private Keywords(String name) {
       this.name = name;
     }
 
@@ -67,16 +69,18 @@ public class Words {
   }
 
   /**
-   * Enum for all reserved stages in StoryLang.
+   * Enum for all reserved stages in StoryLang.<p>
+   * Syntax: run stage,
    */
-  public enum Stage {
+  public enum Stages {
     // Stages
     MAIN("main"),
+    PERIODIC("periodic"),
     END("end");
 
     private final String name;
 
-    private Stage(String name) {
+    private Stages(String name) {
       this.name = name;
     }
 

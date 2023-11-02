@@ -23,13 +23,13 @@ class AppTest {
     @Test
     void testGetFileFromResource() {
         // Test with a file that exists in the resources directory
-        File file = App.getFileFromResource("existingFile.sl");
+        File file = SLL.getFileFromResource("existingFile.sl");
         assertNotNull(file);
         assertTrue(file.exists());
 
         // Test with a file that does not exist in the resources directory
         assertThrows(IllegalArgumentException.class, () -> {
-            App.getFileFromResource("nonExistingFile.sl");
+            SLL.getFileFromResource("nonExistingFile.sl");
         });
     }
 
@@ -37,20 +37,20 @@ class AppTest {
     void testGetFileFromResourceWithNull() {
         // Test with null input
         assertThrows(NullPointerException.class, () -> {
-            App.getFileFromResource(null);
+            SLL.getFileFromResource(null);
         });
     }
 
     @Test
     void testGetFileFromPath() {
         // Test with a file that exists in the resources directory
-        File file = App.getFileFromPath("src/test/resources/existingFile.sl");
+        File file = SLL.getFileFromPath("src/test/resources/Example/existingFile.sl");
         assertNotNull(file);
         assertTrue(file.exists());
 
         // Test with a file that does not exist in the resources directory
         assertThrows(IllegalArgumentException.class, () -> {
-            App.getFileFromPath("src/test/resources/nonExistingFile.sl");
+            SLL.getFileFromPath("src/test/resources/nonExistingFile.sl");
         });
     }
 
@@ -58,13 +58,13 @@ class AppTest {
     void testGetFileFromPathWithNull() {
         // Test with null input
         assertThrows(NullPointerException.class, () -> {
-            App.getFileFromPath(null);
+            SLL.getFileFromPath(null);
         });
     }
 
     @Test
     void testFileToString() {
-        SLL sll = new SLL();
+        SLL sll = new SLL("src/test/resources/Example");
         String filePath = "src/test/resources/testFile.sl";
 
         // Create a test file
@@ -88,12 +88,10 @@ class AppTest {
 
     @Test
     void testGetAllFilePaths() {
-        SLL sll = new SLL();
-        String directoryPath = "src/test/resources";
+        SLL sll = new SLL("src/test/resources");
 
         // Test the getAllFilePaths method
-        List<String> filePaths = sll.getAllFilePaths(directoryPath);
-        assertTrue(filePaths.contains("src/test/resources/existingFile.sl"));
+        List<String> filePaths = sll.getAllFilePaths();
+        assertTrue(filePaths.contains("src/test/resources/Example/existingFile.sl"));
     }
-
 }

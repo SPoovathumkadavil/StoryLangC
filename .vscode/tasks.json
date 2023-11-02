@@ -1,0 +1,26 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "gradle",
+			"id": "/Users/sally/dev/Java/StoryLangCbuildStoryLangC",
+			"script": "build",
+			"description": "Assembles and tests this project.",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"project": "StoryLangC",
+			"buildFile": "/Users/sally/dev/Java/StoryLangC/build.gradle",
+			"rootProject": "StoryLangC",
+			"projectFolder": "/Users/sally/dev/Java/StoryLangC",
+			"workspaceFolder": "/Users/sally/dev/Java/StoryLangC",
+			"args": "",
+			"javaDebug": false,
+			"problemMatcher": [
+				"$gradle"
+			],
+			"label": "gradle: build"
+		}
+	]
+}
